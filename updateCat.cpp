@@ -42,7 +42,7 @@ bool fixCat(int index) {
     return true;
 }
 
-bool updateCatWeight(int index, const float weight) {
+bool updateCatWeight(int index, const Weight weight) {
     if(weight <= 0) {
         return false;
     }

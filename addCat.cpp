@@ -35,7 +35,7 @@ bool validateName(const char* name) {
     return true;
 }
 
-bool validateWeight(const float weight) {
+bool validateWeight(const Weight weight) {
     if (weight <= 0) {
         fprintf(stderr,"animalFarm0: Cat weight must be > 0\n");
         return false;
@@ -58,7 +58,7 @@ unsigned int addCat(
         const enum Gender          gender,
         const enum Breed           breed,
         const bool                 isFixed,
-        const float                weight,
+        const Weight                weight,
         const enum Color           collarColor1,
         const enum Color           collarColor2,
         const unsigned long long   license

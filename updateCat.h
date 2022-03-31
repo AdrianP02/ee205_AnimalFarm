@@ -16,7 +16,7 @@
 
 extern bool updateCatName(int index, const char* name);
 extern bool fixCat(int index);
-extern bool updateCatWeight(int index, const float weight);
+extern bool updateCatWeight(int index, Weight weight);
 extern bool updateCatCollar1(int index, const enum Color color);
 extern bool updateCatCollar2(int index, const enum Color color);
 extern bool updateLicense(int index, const unsigned long long license);

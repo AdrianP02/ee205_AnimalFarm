@@ -18,6 +18,9 @@
 #define MAX_CATS 1024
 #define MAX_CAT_NAME_CHARACTERS 50
 
+typedef float Weight;
+typedef int NumCats;
+
 enum Gender {
     UNKNOWN_GENDER,
     MALE,
