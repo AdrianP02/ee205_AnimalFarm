@@ -10,6 +10,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 #include "catDatabase.h"
 
-int currentNumCats = 0;
+NumCats currentNumCats = 0;
 
 struct Cat cats[MAX_CATS];

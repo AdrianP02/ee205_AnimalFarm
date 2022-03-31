@@ -59,4 +59,4 @@ struct Cat {
 
 extern struct Cat cats[MAX_CATS];
 
-extern int currentNumCats;
+extern NumCats currentNumCats;
