@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 int main() {
-    printf("Starting Animal Farm 1\n");
+    printf("Starting Animal Farm 2\n");
 
     addCat( "Loki", MALE, PERSIAN, true, 8.5, BLACK, WHITE, 101 ) ;
     addCat( "Milo", MALE, MANX, true, 7, BLACK, RED, 102 ) ;
@@ -31,6 +31,8 @@ int main() {
     printAllCats();
     deleteAllCats();
     printAllCats();
+
+    printf("Done with Animal Farm 2\n");
 
     return 0;
 }

@@ -46,16 +46,16 @@ enum Color {
 };
 
 
-struct Cat {
-    char               name[MAX_CAT_NAME_CHARACTERS];
-    enum Gender        gender;
-    enum Breed         breed;
-    bool               isFixed;
-    float              weight;
-    enum Color         collarColor1;
-    enum Color         collarColor2;
-    unsigned long long license;
-};
+//struct Cat {
+//    char               name[MAX_CAT_NAME_CHARACTERS];
+//    enum Gender        gender;
+//    enum Breed         breed;
+//    bool               isFixed;
+//    float              weight;
+//    enum Color         collarColor1;
+//    enum Color         collarColor2;
+//    unsigned long long license;
+//};
 
 extern struct Cat cats[MAX_CATS];
 
