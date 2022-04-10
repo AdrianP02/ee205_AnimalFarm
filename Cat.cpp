@@ -10,6 +10,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 #include "Cat.h"
 #include "catDatabase.h"
+#include "reportCat.h"
 
 #include <iostream>
 #include <cstring>
@@ -54,9 +55,9 @@ bool Cat::print() {
     cout << left ;
     cout << boolalpha ;
     FORMAT_LINE( "Cat", "name" )         << getName()   << endl ;
-    FORMAT_LINE( "Cat", "gender" )       << genderName( getGender() ) << endl ;
-    FORMAT_LINE( "Cat", "breed" )        << breedName( getBreed() )   << endl ;
-    FORMAT_LINE( "Cat", "isFixed" )      << isFixed()   << endl ;
+    FORMAT_LINE( "Cat", "gender" )       << genderString( getGender() ) << endl ;
+    FORMAT_LINE( "Cat", "breed" )        << breedString( getBreed() )   << endl ;
+    FORMAT_LINE( "Cat", "isFixed" )      << getFixed()   << endl ;
     FORMAT_LINE( "Cat", "weight" )       << getWeight() << endl ;
 
     return true ;
