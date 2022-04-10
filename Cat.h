@@ -10,7 +10,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 #pragma once
 
-#include "catDatabase.h"
+#include "config.h"
+
+#define MAX_CAT_NAME_CHARACTERS 50
 
 // Create Cat class
 class Cat {
