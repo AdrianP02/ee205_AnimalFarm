@@ -10,7 +10,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 #pragma once
 
-#include "catDatabase.h"
+#include "Cat.h"
+
 
 #include <stdbool.h>
 #include <stddef.h>
@@ -20,6 +21,8 @@
 
 typedef float Weight;
 typedef int NumCats;
+
+const Weight UNKNOWN_WEIGHT = -1; // When weight is unknown, set to -1
 
 enum Gender {
     UNKNOWN_GENDER,
@@ -45,6 +48,8 @@ enum Color {
     PINK
 };
 
+// Create linked list
+extern Cat* catDatabaseHeadPointer;
 
 //struct Cat {
 //    char               name[MAX_CAT_NAME_CHARACTERS];
@@ -57,6 +62,6 @@ enum Color {
 //    unsigned long long license;
 //};
 
-extern struct Cat cats[MAX_CATS];
+//extern struct Cat cats[MAX_CATS];
 
 extern NumCats currentNumCats;

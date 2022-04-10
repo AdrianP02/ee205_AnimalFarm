@@ -12,4 +12,7 @@
 
 NumCats currentNumCats = 0;
 
-struct Cat cats[MAX_CATS];
+// Initialize the head pointer to NULL
+Cat* catDatabaseHeadPointer = nullptr;
+
+//struct Cat cats[MAX_CATS];
