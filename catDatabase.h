@@ -10,58 +10,17 @@
 ///////////////////////////////////////////////////////////////////////////////
 #pragma once
 
+#include "config.h"
 #include "Cat.h"
-
 
 #include <stdbool.h>
 #include <stddef.h>
 
-#define MAX_CATS 1024
-#define MAX_CAT_NAME_CHARACTERS 50
 
-typedef float Weight;
-typedef int NumCats;
-
-const Weight UNKNOWN_WEIGHT = -1; // When weight is unknown, set to -1
-
-enum Gender {
-    UNKNOWN_GENDER,
-    MALE,
-    FEMALE
-};
-
-enum Breed {
-    UNKNOWN_BREED,
-    MAINE_COON,
-    MANX,
-    SHORTHAIR,
-    PERSIAN,
-    SPHYNX
-};
-
-enum Color {
-    BLACK,
-    WHITE,
-    RED,
-    BLUE,
-    GREEN,
-    PINK
-};
-
-// Create linked list
+// Create head pointer
 extern Cat* catDatabaseHeadPointer;
 
-//struct Cat {
-//    char               name[MAX_CAT_NAME_CHARACTERS];
-//    enum Gender        gender;
-//    enum Breed         breed;
-//    bool               isFixed;
-//    float              weight;
-//    enum Color         collarColor1;
-//    enum Color         collarColor2;
-//    unsigned long long license;
-//};
+// A function that iterates through the database and checking each entry to see if it's valid.
+extern bool validateDatabase();
 
-//extern struct Cat cats[MAX_CATS];
-
-extern NumCats currentNumCats;
+// extern NumCats currentNumCats;

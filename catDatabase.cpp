@@ -10,9 +10,16 @@
 ///////////////////////////////////////////////////////////////////////////////
 #include "catDatabase.h"
 
-NumCats currentNumCats = 0;
+#include <iostream>
+
+using namespace std;
 
 // Initialize the head pointer to NULL
 Cat* catDatabaseHeadPointer = nullptr;
 
-//struct Cat cats[MAX_CATS];
+// Iterate through the database and run validate() for each entry inside
+bool validateDatabase() {
+    for (Cat* catIndex = catDatabaseHeadPointer; catIndex != nullptr; catIndex = catIndex -> next) {
+        catIndex -> validate();
+        }
+    }
