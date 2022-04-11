@@ -9,9 +9,9 @@
 /// @date   11_Mar_2022
 ///////////////////////////////////////////////////////////////////////////////
 #include "reportCat.h"
+#include "Cat.h"
 #include "catDatabase.h"
 
-#include <stdio.h>
 #include <string.h>
 
 // Convert Gender enum into strings using case statement
@@ -46,71 +46,44 @@ const char* breedString(const enum Breed breed) {
     return 0;
 }
 
-// Convert Color enum into strings using case statement
-const char* colorString(const enum Color color) {
-    switch(color) {
-        case BLACK:
-            return "BLACK";
-        case WHITE:
-            return "WHITE";
-        case RED:
-            return "RED";
-        case BLUE:
-            return "BLUE";
-        case GREEN:
-            return "GREEN";
-        case PINK:
-            return "PINK";
-    }
-    return 0;
-}
-
-
-int printAllCats() {
-    for (int index = 0; index < currentNumCats; index = index + 1) {
-        printf("Cat index = [%d]   Name: [%s]   Gender: [%s]   Breed: [%s]   isFixed: [%d]   Weight: [%.1f]   Color 1: [%s]  Color 2: [%s]  License: [%llu]\n",
-               index,
-               cats[index].name,
-               genderString(cats[index].gender),
-               breedString(cats[index].breed),
-               cats[index].isFixed,
-               cats[index].weight,
-               colorString(cats[index].collarColor1),
-               colorString(cats[index].collarColor2),
-               cats[index].license
-        );
-    }
-    return 0;
-}
-
-int printCat( int index ) {
-    if (index < 0 || index > currentNumCats) {
-        printf("animalFarm0: Bad cat [%d]", index);
-        return 0;
-    }
-
-    printf("Cat index = [%d]   Name: [%s]   Gender: [%s]   Breed: [%s]   isFixed: [%d]   Weight: [%.1f]   Color 1: [%s]  Color 2: [%s]  License: [%llu]\n",
-           index,
-           cats[index].name,
-           genderString(cats[index].gender),
-           breedString(cats[index].breed),
-           cats[index].isFixed,
-           cats[index].weight,
-           colorString(cats[index].collarColor1),
-           colorString(cats[index].collarColor2),
-           cats[index].license
-           );
-}
-
-
-
-int findCat( const char* name) {
-    for (int i = 0; i < currentNumCats; i = i + 1) {
-        if (strncmp(name, cats[i].name, MAX_CAT_NAME_CHARACTERS) == 0) {
-            printf("%s's index is %d\n", name, i);
-            return 0;
+// Iterate through the linked list to find a cat name
+// We can reuse the same iteration method as validateDatabase()
+char str1[MAX_CAT_NAME_CHARACTERS];
+char str2[MAX_CAT_NAME_CHARACTERS];
+Cat* findCatByName(const char* findName) {
+    for (Cat* catIndex = catDatabaseHeadPointer; catIndex != nullptr; catIndex = catIndex -> next) {
+        strcpy(str1, findName);
+        strcpy(str2, catIndex -> getName());
+        if (strcmp(str1, str2) == 0) {
+            return catIndex;
         }
     }
-    fprintf(stderr,"animalFarm0: Name not in database");
-    return 0;
 }
+
+
+// Iterate through the linked list and print each cat until we reach nullptr
+void printAllCats() {
+    validateDatabase();
+    for (Cat* catIndex = catDatabaseHeadPointer; catIndex != nullptr; catIndex = catIndex -> next) {
+        catIndex -> print();
+    }
+    validateDatabase();
+}
+// Convert Color enum into strings using case statement
+//const char* colorString(const enum Color color) {
+//    switch(color) {
+//        case BLACK:
+//            return "BLACK";
+//        case WHITE:
+//            return "WHITE";
+//        case RED:
+//            return "RED";
+//        case BLUE:
+//            return "BLUE";
+//        case GREEN:
+//            return "GREEN";
+//        case PINK:
+//            return "PINK";
+//    }
+//    return 0;
+//}

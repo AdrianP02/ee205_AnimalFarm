@@ -10,12 +10,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 #pragma once
 
-#include "catDatabase.h"
+#include "config.h"
+#include "Cat.h"
 
-extern const char* genderString(const enum Gender gender);
-extern const char* breedString(const enum Breed breed);
-extern const char* colorString(const enum Color color);
+extern const char* genderString(enum Gender gender);
+extern const char* breedString(enum Breed breed);
+//extern const char* colorString( enum Color color);
 
-extern int printCat(const int index);
-extern int printAllCats();
-extern int findCat(const char* name);
+
+extern void printAllCats();
+
+extern Cat* findCatByName(const char* findName);
