@@ -10,10 +10,12 @@
 ///////////////////////////////////////////////////////////////////////////////
 #include "Cat.h"
 #include "reportCat.h"
+#include "addCat.h"
 
 #include <iostream>
 #include <cstring>
 #include <iomanip>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -63,11 +65,12 @@ bool Cat::print() {
 }
 
 // Calls all validation functions
-void Cat::validate() {
+bool Cat::validate() {
     validateName(name);
     validateGender(gender);
     validateBreed(breed);
     validateWeight(weight);
+    return true;
 }
 
 // Validate Name
@@ -78,17 +81,17 @@ bool Cat::validateName(const char *newName) {
     // Is newName == NULL
     if (newName == nullptr) {
         cout << "AnimalFarm2: Name cannot be NULL" << endl;
-        return false;
+        exit(EXIT_FAILURE);
     }
     // Is newName long (Longer than MAX_CAT_NAME_CHARACTERS)
     if (strlen(newName) > MAX_CAT_NAME_CHARACTERS) {
         cout << "AnimalFarm2: Name is too long. Maximum characters allowed is: " << MAX_CAT_NAME_CHARACTERS << endl;
-        return false;
+        exit(EXIT_FAILURE);
     }
     // Is newName too short or 0
     if (strlen(newName) <= 0) {
         cout << "AnimalFarm2: Name cannot be blank "<< endl;
-        return false;
+        exit(EXIT_FAILURE);
     }
     return true;
 }
@@ -98,7 +101,7 @@ bool Cat::validateName(const char *newName) {
 bool Cat::validateGender(const Gender newGender) {
     if (newGender == UNKNOWN_GENDER) {
         cout << "AnimalFarm2: Gender must be known" << endl;
-        return false;
+        exit(EXIT_FAILURE);
     }
     return true;
 }
@@ -108,7 +111,7 @@ bool Cat::validateGender(const Gender newGender) {
 bool Cat::validateBreed(const Breed newBreed) {
     if (newBreed == UNKNOWN_BREED) {
         cout << "AnimalFarm2: Breed must be known" << endl;
-        return false;
+        exit(EXIT_FAILURE);
     }
     return true;
 }
@@ -118,7 +121,7 @@ bool Cat::validateBreed(const Breed newBreed) {
 bool Cat::validateWeight(const Weight newWeight) {
     if (newWeight <= 0) {
         cout << "AnimalFarm2: Weight must be >= 0" << endl;
-        return false;
+        exit(EXIT_FAILURE);
     }
     return true;
 }
@@ -159,6 +162,7 @@ void Cat::setGender(Gender newGender) {
     }
     else {
         cout << "AnimalFarm2: Gender is already known and cannot be changed" << endl;
+        exit(EXIT_FAILURE);
     }
 }
 
@@ -169,6 +173,7 @@ void Cat::setBreed(Breed newBreed) {
     }
     else {
         cout << "AnimalFarm2: Breed is already known and cannot be changed" << endl;
+        exit(EXIT_FAILURE);
     }
 }
 

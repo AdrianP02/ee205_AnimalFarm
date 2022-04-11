@@ -40,7 +40,7 @@ private: // Class Destructor
 
 public: // Public Methods
     bool print();               // Print a cat
-    void validate();            // Check if all of Cat member variables are valid (Runs all validation functions)
+    bool validate();            // Check if all of Cat member variables are valid (Runs all validation functions)
 
 public: // Validation functions (Port from AnimalFarm1 files)
     static bool validateName(const char* newName);          // Function for checking if newName is valid
