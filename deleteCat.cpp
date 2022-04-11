@@ -10,8 +10,36 @@
 ///////////////////////////////////////////////////////////////////////////////
 #include "deleteCat.h"
 #include "catDatabase.h"
+#include "Cat.h"
 
-int deleteAllCats() {
-    currentNumCats = 0;
-    return 0;
+#include <iostream>
+
+using namespace std;
+
+Cat* catIndex = catDatabaseHeadPointer;
+// Search through our linked list for the cat we want to delete.
+
+int deleteCat(Cat* delCat) {
+    if (catDatabaseHeadPointer == delCat) {
+        catDatabaseHeadPointer = catDatabaseHeadPointer -> next;
+        delete delCat;
+    }
+
+    while (catIndex != nullptr) {
+        if ((catIndex -> next) == delCat) {
+            (catIndex -> next ) = (delCat -> next);
+            delete delCat;
+        }
+    }
+}
+
+
+// Delete the first cat which causes the linked list to shift. Keep deleting the first cat until we hit NULL
+bool deleteAllCats() {
+    validateDatabase();
+    while(catDatabaseHeadPointer != nullptr) {
+        delete catDatabaseHeadPointer;
+    }
+    validateDatabase();
+    return true;
 }

@@ -10,4 +10,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 #pragma once
 
-extern int deleteAllCats();
+#include "Cat.h"
+
+//extern Cat* deleteCat(const char* delCat);
+
+extern int deleteCat(Cat* delCat);
+
+extern bool deleteAllCats();
