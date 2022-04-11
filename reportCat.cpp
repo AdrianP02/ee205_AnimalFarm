@@ -13,6 +13,9 @@
 #include "catDatabase.h"
 
 #include <string.h>
+#include <iostream>]]
+
+using namespace std;
 
 // Convert Gender enum into strings using case statement
 const char* genderString(const enum Gender gender) {
@@ -55,6 +58,7 @@ Cat* findCatByName(const char* findName) {
         strcpy(str1, findName);
         strcpy(str2, catIndex -> getName());
         if (strcmp(str1, str2) == 0) {
+            cout << "Name found" << endl;           // Debug line
             return catIndex;
         }
     }

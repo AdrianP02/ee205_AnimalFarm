@@ -34,6 +34,7 @@ int deleteCat(Cat* delCat) {
 }
 
 
+
 // Delete the first cat which causes the linked list to shift. Keep deleting the first cat until we hit NULL
 bool deleteAllCats() {
     validateDatabase();

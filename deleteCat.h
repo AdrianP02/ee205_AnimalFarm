@@ -17,3 +17,5 @@
 extern int deleteCat(Cat* delCat);
 
 extern bool deleteAllCats();
+
+
