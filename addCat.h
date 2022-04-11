@@ -11,23 +11,7 @@
 #pragma once
 
 #include "catDatabase.h"
+#include "Cat.h"
 
-extern unsigned int addCat(
-        const char*                name,
-        const enum Gender          gender,
-        const enum Breed           breed,
-        const bool                 isFixed,
-        const Weight                weight,
-        const enum Color           collarColor1,
-        const enum Color           collarColor2,
-        const unsigned long long   license
-);
+extern int addCat(Cat* newCat);
 
-// Validation Functions
-extern bool isDatabaseFull();
-
-extern bool validateName(const char* name);
-
-extern bool validateWeight(const Weight weight);
-
-extern bool isCatNameTaken(const char* name);
