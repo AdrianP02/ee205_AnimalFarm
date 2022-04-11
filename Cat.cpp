@@ -66,10 +66,11 @@ bool Cat::print() {
 
 // Calls all validation functions
 bool Cat::validate() {
-    validateName(name);
-    validateGender(gender);
-    validateBreed(breed);
-    validateWeight(weight);
+    if(!validateName(name) | !validateGender(gender) | !validateBreed(breed) | !validateWeight(weight)) {
+        cout << "This Cat is not valid" << endl;
+        return false;
+    }
+    // cout << "This Cat is valid" << endl;        // Debug line
     return true;
 }
 
@@ -128,22 +129,27 @@ bool Cat::validateWeight(const Weight newWeight) {
 
 // Getters
 const char* Cat::getName() {
+//    cout << name << endl;           // Debug line
     return name;
 }
 
 Gender Cat::getGender() {
+//    cout << gender << endl;         // Debug line
     return gender;
 }
 
 Breed Cat::getBreed() {
+//    cout << breed << endl;          // Debug line
     return breed;
 }
 
 bool Cat::getFixed() {
+//    cout << isCatFixed << endl;     // Debug line
     return isCatFixed;
 }
 
 Weight Cat::getWeight() {
+    cout << weight << endl;         // Debug line
     return weight;
 }
 
@@ -178,7 +184,7 @@ void Cat::setBreed(Breed newBreed) {
 }
 
 void Cat::setFixed() {
-    Cat::isCatFixed == true;
+    Cat::isCatFixed = true;
 }
 
 void Cat::setWeight(Weight newWeight) {
