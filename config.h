@@ -10,7 +10,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 #pragma once
 
-#define PROGRAM_NAME "AnimalFarm3"
+#define PROGRAM_NAME "Animal_Farm_3"
 
 #define MAX_CATS 1024
 #define MAX_CAT_NAME_CHARACTERS 50
