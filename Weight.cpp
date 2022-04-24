@@ -16,10 +16,10 @@
 using namespace std;
 
 /// Define the Static Public Attributes
-const float Weight::UNKNOWN_WEIGHT = -1.0;
+const Weight::t_weight Weight::UNKNOWN_WEIGHT = -1.0;
 
-const float Weight::KILOS_IN_A_POUND = 0.453592;
-const float Weight::SLUGS_IN_A_POUND = 0.031081;
+const Weight::t_weight Weight::KILOS_IN_A_POUND = 0.453592;
+const Weight::t_weight Weight::SLUGS_IN_A_POUND = 0.031081;
 
 const string Weight::POUND_LABEL = "Pound";
 const string Weight::KILO_LABEL  = "Kilo";
@@ -31,7 +31,7 @@ const string Weight::SLUG_LABEL  = "Slug";
 Weight::Weight() noexcept {}
 
 // Create a weight with a value. Unit should be set to the default unit.
-Weight::Weight(const float newWeight) {
+Weight::Weight(const Weight::t_weight newWeight) {
     setWeight(newWeight);
 }
 
@@ -41,23 +41,23 @@ Weight::Weight(Weight::UnitOfWeight newUnitOfWeight) noexcept {
 }
 
 // Create a weight with a value and a unit of weight
-Weight::Weight(float newWeight, Weight::UnitOfWeight newUnitOfWeight) : Weight(newUnitOfWeight) {
+Weight::Weight(const Weight::t_weight newWeight, Weight::UnitOfWeight newUnitOfWeight) : Weight(newUnitOfWeight) {
     setWeight(newWeight, newUnitOfWeight);
 }
 
 // Create a weight with a value and a maximum weight
-Weight::Weight(float newWeight, float newMaxWeight) {
+Weight::Weight(const Weight::t_weight newWeight, const Weight::t_weight newMaxWeight) {
     setWeight(newWeight);
     setMaxWeight(newMaxWeight);
 }
 
 // Create a weight with a unit of weight and a maximum weight value
-Weight::Weight(Weight::UnitOfWeight newUnitOfWeight, float newMaxWeight) : Weight(newUnitOfWeight) {
+Weight::Weight(Weight::UnitOfWeight newUnitOfWeight, const Weight::t_weight newMaxWeight) : Weight(newUnitOfWeight) {
     setMaxWeight(newMaxWeight);
 }
 
 // Create a weight with a value, unit, and maximum weight
-Weight::Weight(float newWeight, Weight::UnitOfWeight newUnitOfWeight, float newMaxWeight) : Weight(newUnitOfWeight, newMaxWeight) {
+Weight::Weight(const Weight::t_weight newWeight, const Weight::UnitOfWeight newUnitOfWeight, const Weight::t_weight newMaxWeight) : Weight(newUnitOfWeight, newMaxWeight) {
     setWeight(newWeight);
 }
 
@@ -75,12 +75,12 @@ float Weight::getWeight() const noexcept {
 }
 
 // Get the weight in a specific unit. Essentially we should return the result of our convertWeight function since we need the result of that
-float Weight::getWeight(Weight::UnitOfWeight weightUnits) const noexcept {
+Weight::t_weight Weight::getWeight(const Weight::UnitOfWeight weightUnits) const noexcept {
     return convertWeight(weight, unitOfWeight, weightUnits);
 }
 
 // Get the maximum weight
-float Weight::getMaxWeight() const noexcept {
+Weight::t_weight Weight::getMaxWeight() const noexcept {
     if (bHasMax == true) {
         return maxWeight;
     }
@@ -95,10 +95,9 @@ Weight::UnitOfWeight Weight::getWeightUnit() const noexcept {
 }
 
 
-
 // Setters
 // Set the weight
-void Weight::setWeight(float newWeight) {
+void Weight::setWeight(const Weight::t_weight newWeight) {
     if (isWeightValid(newWeight) == true) {
         weight = newWeight;
         // Remember to now set bIsKnown to true
@@ -111,7 +110,7 @@ void Weight::setWeight(float newWeight) {
 }
 
 //Set the weight as a specific unit. Here we can just return the convertWeight() results
-void Weight::setWeight(float newWeight, UnitOfWeight weightUnits) {
+void Weight::setWeight(const Weight::t_weight newWeight, const Weight::UnitOfWeight weightUnits) {
     setWeight(convertWeight(newWeight, weightUnits, unitOfWeight));
 }
 
@@ -139,7 +138,7 @@ bool Weight::hasMaxWeight() const noexcept {
 }
 
 // Checks if a weight is valid
-bool Weight::isWeightValid(float checkWeight) const noexcept {
+bool Weight::isWeightValid(const Weight::t_weight checkWeight) const noexcept {
     if (checkWeight <= 0) {
         cout << "Weight must be greater than 0 " << endl;
         return false;
@@ -218,33 +217,33 @@ bool Weight::operator+=( float rhs_addToWeight ) const {
 
 /// Static Public Member Functions
 // Convert from Kilograms to Pounds
-float Weight::fromKilogramToPound( const float kilogram ) noexcept {
+Weight::t_weight Weight::fromKilogramToPound( const float kilogram ) noexcept {
     return kilogram / KILOS_IN_A_POUND ;
 }
 
 // Convert from Pounds to Kilograms
-float Weight::fromPoundToKilogram( const float pound ) noexcept {
+Weight::t_weight Weight::fromPoundToKilogram( const float pound ) noexcept {
     return pound * KILOS_IN_A_POUND ;
 }
 
 
 // Convert from Slugs to Pounds
-float Weight::fromSlugToPound( const float slug ) noexcept {
+Weight::t_weight Weight::fromSlugToPound( const float slug ) noexcept {
     return slug / SLUGS_IN_A_POUND ;
 }
 
 // Convert from Pounds to Slugs
-float Weight::fromPoundToSlug( const float pound ) noexcept {
+Weight::t_weight Weight::fromPoundToSlug( const float pound ) noexcept {
     return pound * SLUGS_IN_A_POUND ;
 }
 
 // Convert a weight between two different units
 // Recall the CatPower lab
-float Weight::convertWeight(float fromWeight, UnitOfWeight fromUnit, UnitOfWeight toUnit) noexcept {
+Weight::t_weight Weight::convertWeight(float fromWeight, UnitOfWeight fromUnit, UnitOfWeight toUnit) noexcept {
     // Set a common value
-    float commonValue;
+    Weight::t_weight commonValue;
     // Set a to Value
-    float toValue;
+    Weight::t_weight toValue;
 
     switch (fromUnit) {
         case POUND: commonValue = fromWeight;
@@ -273,7 +272,7 @@ float Weight::convertWeight(float fromWeight, UnitOfWeight fromUnit, UnitOfWeigh
 
 /// Private member functions
 // Set the maximum weight
-void Weight::setMaxWeight(float newMaxWeight) {
+void Weight::setMaxWeight(const Weight::t_weight newMaxWeight) {
     if (bHasMax == false) {
         if (isWeightValid(newMaxWeight) == true) {
             maxWeight = newMaxWeight;

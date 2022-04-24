@@ -23,39 +23,42 @@ public:         // The different units of measure for weight
         SLUG
     };
 
+    // The native datatype of this Weight class
+    typedef float t_weight; // Basically replaces 'float'
+
 /// Public member functions
 public:         // Constructors
     // Create a default weight
     Weight() noexcept;
 
     // Create a weight with a value. Unit should be set to the default unit.
-    Weight(float newWeight);
+    Weight(t_weight newWeight);
 
     // Create a weight with a unit of weight
     Weight(UnitOfWeight newUnitOfWeight) noexcept;
 
     // Create a weight with a value and a unit of weight
-    Weight(float newWeight, UnitOfWeight newUnitOfWeight);
+    Weight(t_weight newWeight, UnitOfWeight newUnitOfWeight);
 
     // Create a weight with a value and a maximum weight
-    Weight(float newWeight, float newMaxWeight);
+    Weight(t_weight newWeight, t_weight newMaxWeight);
 
     // Create a weight with a unit of weight and a maximum weight value
-    Weight(UnitOfWeight newUnitOfWeight, const float newMaxWeight);
+    Weight(UnitOfWeight newUnitOfWeight, t_weight newMaxWeight);
 
     // Create a weight with a value, unit, and maximum weight
-    Weight(float newWeight, UnitOfWeight newUnitOfWeight, float newMaxWeight);
+    Weight(t_weight newWeight, UnitOfWeight newUnitOfWeight, t_weight newMaxWeight);
 
 
 public:         // Getters
     // Gets the weight in the Weight's units
-    float getWeight() const noexcept;
+    t_weight getWeight() const noexcept;
 
     // Get the weight in a specified unit
-    float getWeight(UnitOfWeight weightUnits) const noexcept;
+    t_weight getWeight(UnitOfWeight weightUnits) const noexcept;
 
     // Get the maximum weight
-    float getMaxWeight() const noexcept;
+    t_weight getMaxWeight() const noexcept;
 
     // Get the UnitOfWeight for this Weight
     UnitOfWeight getWeightUnit() const noexcept;
@@ -63,10 +66,10 @@ public:         // Getters
 
 public:         // Setters
     // Set the weight
-    void setWeight(float newWeight);
+    void setWeight(t_weight newWeight);
 
     // Set the weight as a specific unit
-    void setWeight(float newWeight, UnitOfWeight weightUnits);
+    void setWeight(t_weight newWeight, UnitOfWeight weightUnits);
 
 
 public:         // Validation and other stuff
@@ -77,7 +80,7 @@ public:         // Validation and other stuff
     bool hasMaxWeight() const noexcept;
 
     // Check if the weight is valid (Cannot be < 0). Return true if it is valid.
-    bool isWeightValid(float checkWeight) const noexcept;
+    bool isWeightValid(t_weight checkWeight) const noexcept;
 
     // Validation. Checks if the Weight is good and valid
     bool validate() const noexcept;
@@ -94,40 +97,40 @@ public:         // Operators
     bool operator<(const Weight &rhs_Weight) const;
 
     // Add to an existing weight
-    bool operator+=( float rhs_addToWeight ) const;
+    bool operator+=(t_weight rhs_addToWeight) const;
 
 
 /// Static Public Member Functions
 public:         // Static Methods
     // Convert from Kilograms to Pounds
-    static float fromKilogramToPound(float kilogram) noexcept;
+    static float fromKilogramToPound(t_weight kilogram) noexcept;
 
     // Convert from Pounds to Kilograms
-    static float fromPoundToKilogram(float pound) noexcept;
+    static float fromPoundToKilogram(t_weight pound) noexcept;
 
 
     // Convert from Slugs to Pounds
-    static float fromSlugToPound(float slug) noexcept;
+    static float fromSlugToPound(t_weight slug) noexcept;
 
     // Convert from Pounds to Slugs
-    static float fromPoundToSlug(float pound) noexcept;
+    static float fromPoundToSlug(t_weight pound) noexcept;
 
 
     // Convert a weight between two different units
-    static float convertWeight(float fromWeight, UnitOfWeight fromUnit, UnitOfWeight toUnit) noexcept;
+    static float convertWeight(t_weight fromWeight, UnitOfWeight fromUnit, UnitOfWeight toUnit) noexcept;
 
 
 /// Static Public Attributes
 public:         // Constants and other stuff
     // If weight is unknown, return this.
-    static const float UNKNOWN_WEIGHT;
+    static const t_weight UNKNOWN_WEIGHT;
 
 
     // How many Kilograms in a Pound
-    static const float KILOS_IN_A_POUND;
+    static const t_weight KILOS_IN_A_POUND;
 
     // How many Slugs in a Pound
-    static const float SLUGS_IN_A_POUND;
+    static const t_weight SLUGS_IN_A_POUND;
 
 
     // The string label for Pounds
@@ -143,7 +146,7 @@ public:         // Constants and other stuff
 /// Private Member Functions
 private:        // Private methods
     // Set the maximum weight
-    void setMaxWeight(float newMaxWeight);
+    void setMaxWeight(t_weight newMaxWeight);
 
 
 /// Private Attributes
@@ -158,10 +161,10 @@ private:        // Private variables
     enum UnitOfWeight unitOfWeight = POUND;
 
     // The Weight. Must be > 0. If maxWeight is set, then it must also be <= maxWeight
-    float weight{};
+    t_weight weight{};
 
     // The maximum weight. Can only be set when Weight is being constructed
-    float maxWeight{};
+    t_weight maxWeight{};
 
 };
 
