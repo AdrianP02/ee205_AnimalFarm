@@ -9,185 +9,72 @@
 /// @date   09_Apr_2022
 ///////////////////////////////////////////////////////////////////////////////
 #include "Cat.h"
-#include "reportCat.h"
-#include "addCat.h"
 
 #include <iostream>
-#include <cstring>
-#include <iomanip>
-#include <stdlib.h>
 
 using namespace std;
 
-// Create a cat with default values
-Cat::Cat() {
-    memset(name, 0, MAX_CAT_NAME_CHARACTERS);       // Set the name to be empty
-    gender = UNKNOWN_GENDER;
-    breed = UNKNOWN_BREED;
-    isCatFixed = false;
-    weight = UNKNOWN_WEIGHT;    // UNKNOWN_WEIGHT = -1
-    next = nullptr;             // Since this is now a default slot, the pointer to this slot will be nullptr
-}
-
-// Create a cat with chosen parameters
-Cat::Cat(const char* newName, const Gender newGender, const Breed newBreed, const Weight newWeight) : Cat() {
-    setName(newName);
-    setGender(newGender);
-    setBreed(newBreed);
-    setWeight(newWeight);
-}
-// Zero out/initialize cats
-void Cat::initializeMember() {          // Same contents as Cat::Cat()
-    memset(name, 0, MAX_CAT_NAME_CHARACTERS);
-    gender = UNKNOWN_GENDER;
-    breed = UNKNOWN_BREED;
-    isCatFixed = false;
-    weight = UNKNOWN_WEIGHT;
-    next = nullptr;
-}
-
-// PrintCat Formatting setup
-#define FORMAT_LINE( className, member ) cout << setw(8) << (className) << setw(20) << (member) << setw(52)
-bool Cat::print() {
-    validate();
-
-    cout << setw(80) << setfill( '=' ) << "" << endl ;
-    cout << setfill( ' ' ) ;
-    cout << left ;
-    cout << boolalpha ;
-    FORMAT_LINE( "Cat", "name" )         << getName()   << endl ;
-    FORMAT_LINE( "Cat", "gender" )       << genderString( getGender() ) << endl ;
-    FORMAT_LINE( "Cat", "breed" )        << breedString( getBreed() )   << endl ;
-    FORMAT_LINE( "Cat", "isFixed" )      << getFixed()   << endl ;
-    FORMAT_LINE( "Cat", "weight" )       << getWeight() << endl ;
-
-    return true ;
-}
-
-// Calls all validation functions
-bool Cat::validate() {
-    if(!validateName(name) | !validateGender(gender) | !validateBreed(breed) | !validateWeight(weight)) {
-        cout << "This Cat is not valid" << endl;
-        return false;
-    }
-    // cout << "This Cat is valid" << endl;        // Debug line
-    return true;
-}
-
-// Validate Name
-// Test newName to see if it is valid
-// If it passes all tests, return true
-// *Just transfer over the functions from addCat and edit params
-bool Cat::validateName(const char *newName) {
-    // Is newName == NULL
-    if (newName == nullptr) {
-        cout << "AnimalFarm2: Name cannot be NULL" << endl;
-        exit(EXIT_FAILURE);
-    }
-    // Is newName long (Longer than MAX_CAT_NAME_CHARACTERS)
-    if (strlen(newName) > MAX_CAT_NAME_CHARACTERS) {
-        cout << "AnimalFarm2: Name is too long. Maximum characters allowed is: " << MAX_CAT_NAME_CHARACTERS << endl;
-        exit(EXIT_FAILURE);
-    }
-    // Is newName too short or 0
-    if (strlen(newName) <= 0) {
-        cout << "AnimalFarm2: Name cannot be blank "<< endl;
-        exit(EXIT_FAILURE);
-    }
-    return true;
-}
-
-// Validate Gender
-// Gender must be known
-bool Cat::validateGender(const Gender newGender) {
-    if (newGender == UNKNOWN_GENDER) {
-        cout << "AnimalFarm2: Gender must be known" << endl;
-        exit(EXIT_FAILURE);
-    }
-    return true;
-}
-
-// Validate Breed
-// Breed must be known
-bool Cat::validateBreed(const Breed newBreed) {
-    if (newBreed == UNKNOWN_BREED) {
-        cout << "AnimalFarm2: Breed must be known" << endl;
-        exit(EXIT_FAILURE);
-    }
-    return true;
-}
-
-// Validate Weight
-// Weight must be > 0
-bool Cat::validateWeight(const Weight newWeight) {
-    if (newWeight <= 0) {
-        cout << "AnimalFarm2: Weight must be >= 0" << endl;
-        exit(EXIT_FAILURE);
-    }
-    return true;
-}
-
-// Getters
-const char* Cat::getName() {
-//    cout << name << endl;           // Debug line
+/// Public Member Functions
+// Get Cat name
+string Cat::getName() const noexcept {
     return name;
 }
 
-Gender Cat::getGender() {
-//    cout << gender << endl;         // Debug line
-    return gender;
+// Set Cat name
+void Cat::setName(const string &newName) {
+    if (validateName(newName) == false) {
+        cout << "Invalid name" << endl;
+        exit(EXIT_FAILURE);
+    }
+    name = newName;
 }
 
-Breed Cat::getBreed() {
-//    cout << breed << endl;          // Debug line
-    return breed;
-}
 
-bool Cat::getFixed() {
-//    cout << isCatFixed << endl;     // Debug line
+// Report if cat is fixed
+bool Cat::isFixed() const noexcept {
     return isCatFixed;
 }
 
-Weight Cat::getWeight() {
-    cout << weight << endl;         // Debug line
-    return weight;
+// FIx cat if it is unfixed
+void Cat::fixCat() noexcept {
+    isCatFixed = true;
 }
 
 
-// Setters
-void Cat::setName(const char *newName) {
-    // Validate newName first
-    validateName(newName);
-    strcpy(name, newName);
+// Say Meow
+string Cat::speak() const noexcept {
+    return string("Meow");
 }
 
-void Cat::setGender(Gender newGender) {
-    if (gender == UNKNOWN_GENDER) {
-        validateGender(newGender);
-        Cat::gender = newGender;
+// Print contents
+void Cat::dump() const noexcept {
+    Mammal::dump();
+    FORMAT_LINE_FOR_DUMP( "Cat", "name" ) << getName() << std::endl ;
+    FORMAT_LINE_FOR_DUMP( "Cat", "isFixed" ) << isFixed() << std::endl ;
+}
+
+// Validate
+bool Cat::validate() const noexcept {
+    validateName(getName());
+    return Animal::validate();
+}
+
+
+/// Static Public Member Functions
+// Check if newName is valid
+bool Cat::validateName(const string &newName) {
+    if (newName.empty() == true) {
+        cout << "Cat must have a name" << endl;
+        return false;
     }
-    else {
-        cout << "AnimalFarm2: Gender is already known and cannot be changed" << endl;
-        exit(EXIT_FAILURE);
-    }
+    return true;
 }
 
-void Cat::setBreed(Breed newBreed) {
-    if (breed == UNKNOWN_BREED) {
-        validateBreed(newBreed);
-        Cat::breed = newBreed;
-    }
-    else {
-        cout << "AnimalFarm2: Breed is already known and cannot be changed" << endl;
-        exit(EXIT_FAILURE);
-    }
-}
+/// Static Public Attributes
+// Scientific name for this species
+const string Cat::SPECIES_NAME = "Felis Catus";
 
-void Cat::setFixed() {
-    Cat::isCatFixed = true;
-}
 
-void Cat::setWeight(Weight newWeight) {
-    validateWeight(newWeight);
-    Cat::weight = newWeight;
-}
+// Max weight for this species
+const Weight::t_weight Cat::MAX_WEIGHT = 40;
+

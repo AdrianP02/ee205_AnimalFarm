@@ -11,58 +11,78 @@
 #pragma once
 
 #include "config.h"
+#include "Mammal.h"
 
-#define MAX_CAT_NAME_CHARACTERS 50
+#include <string>
+#include <cstdlib>
 
-// Create Cat class
-class Cat {
-protected: // Class member variables
-    char name[MAX_CAT_NAME_CHARACTERS];
-    enum Gender gender;
-    enum Breed breed;
+using namespace std;
+
+class Cat : public Mammal{
+/// Public Member Functions
+public:
+    //Create a Cat with the minimum fields necessary
+    explicit Cat(const string &newName) : Mammal(MAX_WEIGHT, SPECIES_NAME) {
+    if(validateName(newName) == false) {
+        cout << "Cat must have a name" << endl;
+        exit(EXIT_FAILURE);
+    }
+    name = newName;
+    isCatFixed = false;
+    }
+
+    // Create a Cat with all member variables
+    Cat (const string& newName, const Color newColor, const bool newIsFixed, const Gender newGender, const Weight::t_weight newWeight) : Mammal(newColor, newGender, newWeight, MAX_WEIGHT, SPECIES_NAME) {
+    if(validateName(newName) == false) {
+        cout << "Cat must have a name" << endl;
+        exit(EXIT_FAILURE);
+    }
+    name = newName;
+    isCatFixed = newIsFixed;
+    }
+
+    // Get Cat name
+    string getName() const noexcept;
+
+    // Set Cat name
+    void setName(const string &newName);
+
+    // Report if cat is fixed
+    bool isFixed() const noexcept;
+
+    // FIx cat if it is unfixed
+    void fixCat() noexcept;
+
+    // Say Meow
+    string speak () const noexcept override;
+
+    // Print contents
+    void dump() const noexcept override;
+
+    // Validate
+    bool validate() const noexcept override;
+
+
+/// Static Public Member Functions
+public:
+    // Check if newName is valid
+    static bool validateName(const string &newName);
+
+
+/// Static Public Attributes
+public:
+    // Scientific name for this species
+    static const string SPECIES_NAME;
+
+    // Max weight for this species
+    static const Weight::t_weight MAX_WEIGHT;
+
+/// Protected Attributes
+protected:
+    // Name of cat
+    string name;
+
+    // Is cat fixed or not
     bool isCatFixed;
-    Weight weight;
-
-public: // Public class member variable
-    Cat* next;                  // Pointer to the Cat class
-
-public: // Class Constructors
-    Cat();                      // Construct a cat with default values
-
-    Cat(const char* newName,    // Construct a cat with the following parameters
-        Gender newGender,       // Note: We do not have 'Fixed' in here because we can only fix a cat if it's not. We cannot unfix a cat... yet...
-        Breed newBreed,         //       We also don't have any info on if the Cats are fixed or not on the spec sheet
-        Weight newWeight
-    );
-
-private: // Class Destructor
-    void initializeMember();    // Zero out all member data
-
-public: // Public Methods
-    bool print();               // Print a cat
-    bool validate();            // Check if all of Cat member variables are valid (Runs all validation functions)
-
-public: // Validation functions (Port from AnimalFarm1 files)
-    static bool validateName(const char* newName);          // Function for checking if newName is valid
-    static bool validateGender(const Gender newGender);      // Function for checking if newGender is valid
-    static bool validateBreed(const Breed newBreed);         // Function for checking if newBreed is valid
-    static bool validateWeight(const Weight newWeight);      // Function for checking if newWeight is valid
-
-public: // Getters
-    const char* getName();   // Get a Cat's name
-    Gender getGender();      // Get a Cat's gender
-    Breed getBreed();        // Get a Cat's breed
-    bool getFixed();         // See if a Cat is fixed
-    Weight getWeight();      // Get a Cat's weight
-
-public: // Setters
-    void setName(const char* newName);  // Set a Cat's name
-    void setGender(Gender newGender);   // Set a Cat's gender       // Change this to protected later
-    void setBreed(Breed newBreed);      // Set a Cat's breed        // Change this to protected later
-    void setFixed();                    // Fix a Cat
-    void setWeight(Weight newWeight);   // Set a Cat's weight
 
 };
-
-
-
