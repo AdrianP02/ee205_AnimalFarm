@@ -1,10 +1,9 @@
 
-#include <cstdlib>  // For EXIT_SUCCESS / EXIT_FAILURE
 #include <iostream>
-
 #include "config.h"
-#include "Cat.h"
 #include "SinglyLinkedList.h"
+#include "Cat.h"
+#include "Weight.h"
 
 using namespace std ;
 
