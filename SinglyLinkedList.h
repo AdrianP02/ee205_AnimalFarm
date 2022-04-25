@@ -8,13 +8,33 @@
 /// @author Adrian Peng <apeng2@hawaii.edu>
 /// @date   24_Apr_2022
 ///////////////////////////////////////////////////////////////////////////////
-#ifndef EE205_LAB_08D_ANIMAL_FARM_1_TO_CLION_SINGLYLINKEDLIST_H
-#define EE205_LAB_08D_ANIMAL_FARM_1_TO_CLION_SINGLYLINKEDLIST_H
+#pragma once
 
+#include "config.h"
+#include "Node.h"   // Friend class
+#include "List.h"   // Friend class
 
-class SinglyLinkedList {
+class SinglyLinkedList : public List {
+public:
+    /// Public Member Functions
+    // Create a new SinglyLinkedList
+    SinglyLinkedList();
+
+    // Insert newNode to the beginning of the List
+    void push_front(Node *newNode);
+
+    // Remove and return the first Node in the list
+    Node* pop_front() noexcept override;
+
+    // Insert newNode after currentNode
+    void insert_after (Node *currentNode, Node *newNode);
+
+    // Output the contents of this container
+    void dump() const noexcept override;
+
+    // Validate
+    bool validate() const noexcept override;
 
 };
 
 
-#endif //EE205_LAB_08D_ANIMAL_FARM_1_TO_CLION_SINGLYLINKEDLIST_H
