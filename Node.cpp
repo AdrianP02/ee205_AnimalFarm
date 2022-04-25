@@ -22,7 +22,7 @@ void Node::dump() const {
 
 // Check and validate the Node
 bool Node::validate() const noexcept {
-//
+
 }
 
 // Compare two nodes. Is left side > than right side
