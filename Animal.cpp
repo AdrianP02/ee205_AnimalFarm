@@ -82,7 +82,6 @@ void Animal::setWeight(const Weight::t_weight newWeight) {
     weight.setWeight(newWeight);
 }
 
-// Ask animal to say something
 
 
 // Output contents
@@ -94,7 +93,7 @@ void Animal::dump() const noexcept {
     FORMAT_LINE_FOR_DUMP("Animal", "classification" ) << getClassification() << endl ;
     FORMAT_LINE_FOR_DUMP("Animal", "species" ) << getSpecies() << endl ;
     FORMAT_LINE_FOR_DUMP("Animal", "gender" ) << getGender() << endl ;
-    FORMAT_LINE_FOR_DUMP("Animal", "weight" ) << weight.getWeight() << endl ;
+    cout <<"Animal  weight              " << getWeight() << " out of " << weight.getMaxWeight() << " " << weight.getWeightUnit() << endl;
 }
 
 // Validate

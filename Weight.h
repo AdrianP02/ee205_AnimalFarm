@@ -167,5 +167,6 @@ private:        // Private variables
     t_weight maxWeight{};
 
 };
+std::ostream& operator<<( std::ostream& lhs_stream, const Weight& rhs_Weight );
 
-
+std::ostream& operator<<( std::ostream& lhs_stream, Weight::UnitOfWeight rhs_UnitOfWeight );
