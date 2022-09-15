@@ -7,6 +7,10 @@ Animal Farm is a series of labs intended to teach the basics of C and C++.  It's
 Software Engineering practices.  Students are expected to "Live" in
 this project as the code evolves over a series of requirements.
 
+#### Links
+The project's home page (hosted by GitHub) is [here](https://github.com/marknelsonengineer/ee205_lab10d_animal_farm_2)
+
+The documentation for the source code (hosted by UH) is [here](http://www2.hawaii.edu/~marknels/ee205/animalFarm/index.html)
 
 #### Roadmap
 | Animal Farm Version | Description                                                                                                                                                                                                                                                                                                                                                                                    |
